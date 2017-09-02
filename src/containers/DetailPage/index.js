@@ -1,21 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const DetailPage = props => {
+import { connect } from 'react-redux';
+import { fetchArticle } from '../../actions';
 
-  return (
-    <div className="DetailPage">
-      <h2>{props.title}</h2>
-      <i>{props.author}</i>
-      <p>{props.excerpt}</p>
-    </div>
-  );
-};
+import ExtendedCard from '../../components/ExtendedCard';
+import Loader from '../../components/Loader';
+
+class DetailPage extends Component {
+
+  componentDidMount() {
+    const articleID = this.props.match.params.id;
+    const { dispatch } = this.props;
+    dispatch(fetchArticle(articleID));
+  }
+
+  render() {
+    const { article, isFetching } = this.props;
+
+    return (
+      <div className="HomePage">
+        {isFetching ?
+          <Loader title="Loading data..." /> :
+          <div className="HomePage__container">
+            <ExtendedCard {...article} />
+          </div>
+        }
+      </div>
+    );
+  }
+}
 
 DetailPage.propTypes = {
-  author: PropTypes.string,
-  excerpt: PropTypes.string,
-  title: PropTypes.string,
+  dispatch: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
-export default DetailPage;
+const mapStateToProps = state => {
+  const { isFetching, article } = state;
+  return {
+    isFetching,
+    article,
+  };
+};
+
+export default connect(mapStateToProps)(DetailPage);

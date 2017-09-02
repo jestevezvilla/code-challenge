@@ -7,6 +7,8 @@ import { fetchArticles } from '../../actions';
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
 
+import './styles.css';
+
 class HomePage extends Component {
 
   componentDidMount() {
@@ -25,10 +27,12 @@ class HomePage extends Component {
     const { articles, isFetching } = this.props;
 
     return (
-      <div>
+      <div className="HomePage">
         {isFetching ?
           <Loader title="Loading data..." /> :
-          articles.map(item => <Card key={item.id} {...item} />)
+          <div className="HomePage__container">
+            {articles.map(item => <Card key={item.id} {...item} />)}
+          </div>
         }
       </div>
     );
@@ -44,8 +48,8 @@ HomePage.propTypes = {
 const mapStateToProps = state => {
   const { isFetching, articles } = state;
   return {
-    articles,
     isFetching,
+    articles,
   };
 };
 

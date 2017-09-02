@@ -1,9 +1,12 @@
 
 import request from './request';
-import { ARTICLES_QUERY } from './queries';
+import { ARTICLES_QUERY, ARTICLE_QUERY } from './queries';
 
 export const REQUEST_ARTICLES = 'REQUEST_ARTICLES';
 export const RECEIVE_ARTICLES = 'RECEIVE_ARTICLES';
+
+export const REQUEST_ARTICLE = 'REQUEST_ARTICLE';
+export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE';
 
 const receiveArticles = json => (
   {
@@ -22,10 +25,25 @@ export const fetchArticles = () => dispatch => {
       },
       error =>
         console.log('An error occured.', error.message),
-      // dispatch({
-      //   type: 'REQUEST_ARTICLES_FAILURE',
-      //   error: error.message,
-      // }),
     );
 };
 
+const receiveArticle = json => (
+  {
+    type: RECEIVE_ARTICLE,
+    article: json.data.article,
+  }
+);
+
+export const fetchArticle = id => dispatch => {
+  dispatch({ type: REQUEST_ARTICLE });
+
+  request(ARTICLE_QUERY(id))
+    .then(
+      response => {
+        dispatch(receiveArticle(response));
+      },
+      error =>
+        console.log('An error occured.', error.message),
+    );
+};

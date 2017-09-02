@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import reducers from './reducers';
+
+import articles from './reducers';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -14,7 +15,7 @@ import DetailPage from './containers/DetailPage';
 const loggerMiddleware = createLogger();
 
 const store = createStore(
-  reducers,
+  articles,
   applyMiddleware(
     thunkMiddleware,
     loggerMiddleware,
@@ -27,8 +28,8 @@ const App = () => (
       <Header title="Billin code challenge" />
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} />
           <Route path="/:id" component={DetailPage} />
+          <Route path="/" component={HomePage} />
         </Switch>
       </Router>
       <Footer title="@Copyright 2017" />
