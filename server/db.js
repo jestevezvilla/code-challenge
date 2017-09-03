@@ -2,6 +2,8 @@ import _ from 'lodash';
 import Faker from 'faker';
 import mongoose from 'mongoose';
 
+// mongoose Promises will be deprecated
+mongoose.Promise = Promise;
 mongoose.connect('mongodb://localhost/billin');
 mongoose.set('debug', true);
 

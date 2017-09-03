@@ -1,12 +1,14 @@
 
 import request from './request';
-import { ARTICLES_QUERY, ARTICLE_QUERY } from './queries';
+import { ARTICLES_QUERY, ARTICLE_QUERY, DELETE_ARTICLE_QUERY } from './queries';
 
 export const REQUEST_ARTICLES = 'REQUEST_ARTICLES';
 export const RECEIVE_ARTICLES = 'RECEIVE_ARTICLES';
 
 export const REQUEST_ARTICLE = 'REQUEST_ARTICLE';
 export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE';
+
+export const REMOVED_ARTICLE = 'REMOVED_ARTICLE';
 
 const receiveArticles = json => (
   {
@@ -46,4 +48,22 @@ export const fetchArticle = id => dispatch => {
       error =>
         console.log('An error occured.', error.message),
     );
+};
+
+const removeArticle = json => (
+  {
+    type: REMOVED_ARTICLE,
+    article: json.data.deleteArticle,
+  }
+);
+
+export const deleteArticle = id => dispatch => {
+  request(DELETE_ARTICLE_QUERY(id))
+  .then(
+    response => {
+      dispatch(removeArticle(response));
+    },
+    error =>
+      console.log('An error occured.', error.message),
+  );
 };

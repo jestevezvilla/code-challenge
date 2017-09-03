@@ -1,7 +1,8 @@
 import { REQUEST_ARTICLES,
          RECEIVE_ARTICLES,
          REQUEST_ARTICLE,
-         RECEIVE_ARTICLE } from '../actions';
+         RECEIVE_ARTICLE,
+         REMOVED_ARTICLE } from '../actions';
 
 const defaultState = {
   isFetching: false,
@@ -10,7 +11,6 @@ const defaultState = {
 };
 
 const articles = (state = defaultState, action) => {
-
   switch (action.type) {
     case REQUEST_ARTICLES:
       return {
@@ -33,6 +33,12 @@ const articles = (state = defaultState, action) => {
         ...state,
         isFetching: false,
         article: action.article,
+      };
+    case REMOVED_ARTICLE:
+      return {
+        ...state,
+        isFetching: false,
+        articles: state.articles.filter(article => article.id !== action.article.id),
       };
     default:
       return state;

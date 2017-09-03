@@ -17,3 +17,15 @@ export const ARTICLE_QUERY = id => `{
     title
   }
 }`;
+
+export const DELETE_ARTICLE_QUERY = id => `mutation {
+  deleteArticle(id:"${id}") {
+    id
+  }
+}`;
+
+export const UPDATE_ARTICLE_QUERY = id => `mutation {
+  updateArticle(id:"${id}") {
+    id
+  }
+}`;

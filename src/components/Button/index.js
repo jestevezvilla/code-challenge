@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-
-import './styles.css';
 
 const Button = props =>
-  (<Link className="Button" to={props.action}>{props.text}</Link>);
+  (<a className="Button" onClick={props.onButtonClick}>{props.text}</a>);
 
 Button.propTypes = {
-  action: PropTypes.string.isRequired,
+  onButtonClick: PropTypes.func,
   text: PropTypes.string.isRequired,
 };
 

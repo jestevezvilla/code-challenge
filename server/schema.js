@@ -50,7 +50,6 @@ const Query = new GraphQLObjectType({
       type: articleType,
       args: {
         id: {
-          name: 'id',
           type: new GraphQLNonNull(GraphQLString),
         },
       },
@@ -60,8 +59,62 @@ const Query = new GraphQLObjectType({
   }),
 });
 
+// mutation
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    createArticle: {
+      type: articleType,
+      args: {
+        author: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+      },
+      resolve(root, { author }) {
+        const article = new db.Article();
+        article.author = author;
+        return article.save();
+      },
+    },
+    deleteArticle: {
+      type: articleType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+      },
+      resolve(root, { id }) {
+        return db.Article.findOneAndRemove(id);
+      },
+    },
+    updateArticle: {
+      type: articleType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+        author: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+        published: {
+          type: new GraphQLNonNull(GraphQLBoolean),
+        },
+      },
+      resolve(obj, { id, author, published }) {
+        db.Article.update(
+          { _id: id },
+          { $set:
+            { author, published },
+          });
+        return db.Article.findById(id);
+      },
+    },
+  },
+});
+
 const Schema = new GraphQLSchema({
   query: Query,
+  mutation: Mutation,
 });
 
 export default Schema;

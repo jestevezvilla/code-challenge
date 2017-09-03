@@ -34,6 +34,7 @@ class DetailPage extends Component {
 DetailPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  match: PropTypes.shape({ params: { id: {} } }),
 };
 
 const mapStateToProps = state => {
