@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { fetchArticle } from '../../actions';
+import { fetchArticle, updateArticle } from '../../actions';
 
 import ExtendedCard from '../../components/ExtendedCard';
 import Loader from '../../components/Loader';
@@ -11,19 +11,19 @@ class DetailPage extends Component {
 
   componentDidMount() {
     const articleID = this.props.match.params.id;
-    const { dispatch } = this.props;
-    dispatch(fetchArticle(articleID));
+    const { fetchData } = this.props;
+    fetchData(articleID);
   }
 
   render() {
-    const { article, isFetching } = this.props;
+    const { article, isFetching, updateData } = this.props;
 
     return (
       <div className="HomePage">
         {isFetching ?
           <Loader title="Loading data..." /> :
           <div className="HomePage__container">
-            <ExtendedCard {...article} />
+            <ExtendedCard {...article} onChangeData={(id, title) => updateData(id, title)} />
           </div>
         }
       </div>
@@ -32,9 +32,9 @@ class DetailPage extends Component {
 }
 
 DetailPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  match: PropTypes.shape({ params: { id: {} } }),
+  updateData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -45,4 +45,15 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(DetailPage);
+const mapDispatchToProps = dispatch => ({
+  fetchData(id) {
+    dispatch(fetchArticle(id));
+  },
+  updateData(id, title) {
+    dispatch(updateArticle(id, title));
+  },
+});
+
+export default
+  connect(mapStateToProps,
+    mapDispatchToProps)(DetailPage);

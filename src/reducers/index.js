@@ -2,7 +2,8 @@ import { REQUEST_ARTICLES,
          RECEIVE_ARTICLES,
          REQUEST_ARTICLE,
          RECEIVE_ARTICLE,
-         REMOVED_ARTICLE } from '../actions';
+         REMOVED_ARTICLE,
+         UPDATED_ARTICLE } from '../actions';
 
 const defaultState = {
   isFetching: false,
@@ -39,6 +40,12 @@ const articles = (state = defaultState, action) => {
         ...state,
         isFetching: false,
         articles: state.articles.filter(article => article.id !== action.article.id),
+      };
+    case UPDATED_ARTICLE:
+      return {
+        ...state,
+        isFetching: false,
+        article: action.article,
       };
     default:
       return state;

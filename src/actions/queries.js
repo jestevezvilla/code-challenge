@@ -15,6 +15,7 @@ export const ARTICLE_QUERY = id => `{
     published
     tags
     title
+    id
   }
 }`;
 
@@ -24,8 +25,14 @@ export const DELETE_ARTICLE_QUERY = id => `mutation {
   }
 }`;
 
-export const UPDATE_ARTICLE_QUERY = id => `mutation {
-  updateArticle(id:"${id}") {
+export const UPDATE_ARTICLE_QUERY = (id, title) => `mutation {
+  updateArticle(id:"${id}" title:"${title}") {
+    author
+    excerpt
+    content
+    published
+    tags
+    title
     id
   }
 }`;

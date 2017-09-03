@@ -93,18 +93,15 @@ const Mutation = new GraphQLObjectType({
         id: {
           type: new GraphQLNonNull(GraphQLString),
         },
-        author: {
+        title: {
           type: new GraphQLNonNull(GraphQLString),
         },
-        published: {
-          type: new GraphQLNonNull(GraphQLBoolean),
-        },
       },
-      resolve(obj, { id, author, published }) {
-        db.Article.update(
+      resolve: async (obj, { id, title }) => {
+        await db.Article.update(
           { _id: id },
           { $set:
-            { author, published },
+            { title },
           });
         return db.Article.findById(id);
       },

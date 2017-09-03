@@ -3,6 +3,8 @@
 
 /* Button Base - Reset Styles*/
 
+extarea, input, button { outline: none; }
+
 [role="button"],
 input[type="submit"],
 input[type="reset"],
