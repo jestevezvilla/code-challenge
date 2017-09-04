@@ -18,7 +18,6 @@ class HomePage extends Component {
 
   render() {
     const { articles, isFetching, onDeleteClick } = this.props;
-
     return (
       <div className="HomePage">
         {isFetching ?
@@ -44,7 +43,7 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { isFetching, articles } = state;
+  const { isFetching, articles } = state.articles;
   return {
     isFetching,
     articles,

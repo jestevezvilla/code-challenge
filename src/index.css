@@ -54,6 +54,7 @@ button::-moz-focus-inner {
 .Button{
   color: #000;
   cursor: pointer;
+  display: inline-block;
   font-size: 12px;
   text-decoration: none;
   border: 1px solid grey;
@@ -63,4 +64,8 @@ button::-moz-focus-inner {
   line-height: 20px;
   padding: 5px 10px;
   margin-right: 10px;
+}
+
+.Button-top{
+  margin-bottom: 10px;
 }

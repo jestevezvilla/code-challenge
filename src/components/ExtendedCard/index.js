@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import LinkButton from '../../components/LinkButton';
+import Message from '../../components/Message';
 
 import './styles.css';
 
@@ -22,9 +24,9 @@ class ExtendedCard extends Component {
     });
 
   changeTitle = ev => {
-    const { onChangeData, ...props } = this.props;
-    if (ev.target.value !== '' && ev.target.value !== props.title) {
-      onChangeData(props.id, ev.target.value);
+    const { onChangeData, article } = this.props;
+    if (ev.target.value !== '' && ev.target.value !== article.title) {
+      onChangeData(article.id, ev.target.value);
     }
   }
 
@@ -35,31 +37,34 @@ class ExtendedCard extends Component {
   }
 
   render() {
-    const { ...props } = this.props;
+    const { isUpdated, article } = this.props;
     const { editable } = this.state;
     return (<div className="CardExtended">
+      <LinkButton buttonClass="Button-top" action="/" text="&lt; Back" />
+      {isUpdated &&
+        <Message text="Article updated!" />}
       <div className="CardExtended__wrapper">
-        <h2>
+        <h2 className="CardExtended__wrapper__title">
           {!editable ?
             <span
               className="CardExtended__wrapper__input"
               onClick={this.makeEditable}
-            >{props.title}</span>
+            >{article.title}</span>
             :
             <input
               type="text"
               autoFocus
               className="CardExtended__wrapper__input"
-              defaultValue={props.title}
+              defaultValue={article.title}
               onBlur={this.changeTitle}
               onKeyPress={this.handleKeyPress}
             />}
         </h2>
-        {props.tags && this.getTags(props.tags)}
-        {props.published &&
+        {article.tags && this.getTags(article.tags)}
+        {article.published &&
           <span className="CardExtended__wrapper__badge">Published</span>}
-        <i>{props.author}</i>
-        <p className="CardExtended__wrapper__p">{props.content}</p>
+        <i>{article.author}</i>
+        <p className="CardExtended__wrapper__p">{article.content}</p>
       </div>
     </div>);
   }
@@ -67,12 +72,8 @@ class ExtendedCard extends Component {
 }
 
 ExtendedCard.propTypes = {
-  author: PropTypes.string,
-  content: PropTypes.string,
+  isUpdated: PropTypes.bool,
   onChangeData: PropTypes.func,
-  published: PropTypes.bool,
-  tags: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string,
 };
 
 export default ExtendedCard;

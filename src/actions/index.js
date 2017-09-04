@@ -1,9 +1,11 @@
 
 import request from './request';
-import { ARTICLES_QUERY,
-        ARTICLE_QUERY,
-        DELETE_ARTICLE_QUERY,
-        UPDATE_ARTICLE_QUERY } from './queries';
+import {
+  ARTICLES_QUERY,
+  ARTICLE_QUERY,
+  DELETE_ARTICLE_QUERY,
+  UPDATE_ARTICLE_QUERY,
+} from './queries';
 
 export const REQUEST_ARTICLES = 'REQUEST_ARTICLES';
 export const RECEIVE_ARTICLES = 'RECEIVE_ARTICLES';
@@ -14,6 +16,8 @@ export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE';
 export const REMOVED_ARTICLE = 'REMOVED_ARTICLE';
 
 export const UPDATED_ARTICLE = 'UPDATED_ARTICLE';
+
+export const POST_UPDATED_ARTICLE = 'POST_UPDATED_ARTICLE';
 
 const receiveArticles = json => (
   {
@@ -27,12 +31,12 @@ export const fetchArticles = () => dispatch => {
 
   request(ARTICLES_QUERY)
     .then(
-      response => {
-        dispatch(receiveArticles(response));
-      },
-      error =>
-        console.log('An error occured.', error.message),
-    );
+    response => {
+      dispatch(receiveArticles(response));
+    },
+    error =>
+      console.log('An error occured.', error.message),
+  );
 };
 
 const receiveArticle = json => (
@@ -47,12 +51,12 @@ export const fetchArticle = id => dispatch => {
 
   request(ARTICLE_QUERY(id))
     .then(
-      response => {
-        dispatch(receiveArticle(response));
-      },
-      error =>
-        console.log('An error occured.', error.message),
-    );
+    response => {
+      dispatch(receiveArticle(response));
+    },
+    error =>
+      console.log('An error occured.', error.message),
+  );
 };
 
 const removeArticle = json => (
@@ -64,7 +68,7 @@ const removeArticle = json => (
 
 export const deleteArticle = id => dispatch => {
   request(DELETE_ARTICLE_QUERY(id))
-  .then(
+    .then(
     response => {
       dispatch(removeArticle(response));
     },
@@ -82,7 +86,7 @@ const updatedArticle = json => (
 
 export const updateArticle = (id, title) => dispatch => {
   request(UPDATE_ARTICLE_QUERY(id, title))
-  .then(
+    .then(
     response => {
       dispatch(updatedArticle(response));
     },
@@ -90,3 +94,11 @@ export const updateArticle = (id, title) => dispatch => {
       console.log('An error occured.', error.message),
   );
 };
+
+export const postUpdatedArticle = () => dispatch =>
+
+  dispatch({
+    type: POST_UPDATED_ARTICLE,
+
+  });
+

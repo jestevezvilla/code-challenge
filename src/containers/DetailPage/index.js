@@ -16,14 +16,13 @@ class DetailPage extends Component {
   }
 
   render() {
-    const { article, isFetching, updateData } = this.props;
-
+    const { isFetching, updateData, ...props } = this.props;
     return (
       <div className="HomePage">
         {isFetching ?
           <Loader title="Loading data..." /> :
           <div className="HomePage__container">
-            <ExtendedCard {...article} onChangeData={(id, title) => updateData(id, title)} />
+            <ExtendedCard {...props} onChangeData={(id, title) => updateData(id, title)} />
           </div>
         }
       </div>
@@ -38,9 +37,10 @@ DetailPage.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const { isFetching, article } = state;
+  const { isFetching, isUpdated, article } = state.article;
   return {
     isFetching,
+    isUpdated,
     article,
   };
 };
