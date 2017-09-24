@@ -25,7 +25,7 @@ const store = createStore(
 const App = () => (
   <Provider store={store}>
     <div className="App">
-      <Header title="Billin code challenge" />
+      <Header title="Authors" />
       <Router>
         <Switch>
           <Route path="/:id" component={DetailPage} />
