@@ -12,8 +12,8 @@ const Card = props => (
       <h2 className="Card__wrapper__title">{props.title}</h2>
       <i>{props.author}</i>
       <p className="Card__wrapper__p">{props.excerpt}</p>
-      <Button onButtonClick={props.onDelete} text="Delete" />
-      <LinkButton action={props.id} text="View Details" />
+      <Button onButtonClick={props.onDelete} text="Remove" />
+      <LinkButton action={props.id} text="View Detail" />
     </div>
   </div>
 );
