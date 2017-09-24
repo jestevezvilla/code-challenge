@@ -40,7 +40,7 @@ class ExtendedCard extends Component {
     const { isUpdated, article } = this.props;
     const { editable } = this.state;
     return (<div className="CardExtended">
-      <LinkButton buttonClass="Button-top" action="/" text="&lt; Back" />
+      <LinkButton buttonClass="Button-top" action="/" text="&lt; Back to list" />
       {isUpdated &&
         <Message text="Article updated!" />}
       <div className="CardExtended__wrapper">
