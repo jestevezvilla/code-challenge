@@ -13,7 +13,7 @@ const Card = props => (
       <i>{props.author}</i>
       <p className="Card__wrapper__p">{props.excerpt}</p>
       <Button onButtonClick={props.onDelete} text="Delete" />
-      <LinkButton action={props.id} text="Details" />
+      <LinkButton action={props.id} text="View Details" />
     </div>
   </div>
 );
