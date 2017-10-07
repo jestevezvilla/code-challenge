@@ -1,11 +1,6 @@
 
 import request from './request';
-import {
-  ARTICLES_QUERY,
-  ARTICLE_QUERY,
-  DELETE_ARTICLE_QUERY,
-  UPDATE_ARTICLE_QUERY,
-} from './queries';
+import { DELETE_ARTICLE_QUERY } from './queries';
 
 export const REQUEST_ARTICLES = 'REQUEST_ARTICLES';
 export const RECEIVE_ARTICLES = 'RECEIVE_ARTICLES';
@@ -15,49 +10,28 @@ export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE';
 
 export const REMOVED_ARTICLE = 'REMOVED_ARTICLE';
 
+export const REQUEST_UPDATE_ARTICLE = 'REQUEST_UPDATE_ARTICLE';
+
 export const UPDATED_ARTICLE = 'UPDATED_ARTICLE';
 
 export const POST_UPDATED_ARTICLE = 'POST_UPDATED_ARTICLE';
 
-const receiveArticles = json => (
-  {
-    type: RECEIVE_ARTICLES,
-    articles: json.data.articles,
-  }
-);
+export const fetchArticlesAction = () => ({
+  type: REQUEST_ARTICLES,
+});
 
-export const fetchArticles = () => dispatch => {
-  dispatch({ type: REQUEST_ARTICLES });
+export const fetchArticleAction = id => ({
+  type: REQUEST_ARTICLE,
+  id,
+});
 
-  request(ARTICLES_QUERY)
-    .then(
-    response => {
-      dispatch(receiveArticles(response));
-    },
-    error =>
-      console.log('An error occured.', error.message),
-  );
-};
+export const updateArticleAction = payload => ({
+  type: REQUEST_UPDATE_ARTICLE,
+  payload,
+});
 
-const receiveArticle = json => (
-  {
-    type: RECEIVE_ARTICLE,
-    article: json.data.article,
-  }
-);
 
-export const fetchArticle = id => dispatch => {
-  dispatch({ type: REQUEST_ARTICLE });
 
-  request(ARTICLE_QUERY(id))
-    .then(
-    response => {
-      dispatch(receiveArticle(response));
-    },
-    error =>
-      console.log('An error occured.', error.message),
-  );
-};
 
 const removeArticle = json => (
   {
@@ -76,29 +50,4 @@ export const deleteArticle = id => dispatch => {
       console.log('An error occured.', error.message),
   );
 };
-
-const updatedArticle = json => (
-  {
-    type: UPDATED_ARTICLE,
-    article: json.data.updateArticle,
-  }
-);
-
-export const updateArticle = (id, title) => dispatch => {
-  request(UPDATE_ARTICLE_QUERY(id, title))
-    .then(
-    response => {
-      dispatch(updatedArticle(response));
-    },
-    error =>
-      console.log('An error occured.', error.message),
-  );
-};
-
-export const postUpdatedArticle = () => dispatch =>
-
-  dispatch({
-    type: POST_UPDATED_ARTICLE,
-
-  });
 

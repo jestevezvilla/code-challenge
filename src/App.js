@@ -2,8 +2,10 @@ import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import thunkMiddleware from 'redux-thunk';
+//
 import { createLogger } from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
 
 import reducers from './reducers';
 
@@ -14,13 +16,17 @@ import DetailPage from './containers/DetailPage';
 
 const loggerMiddleware = createLogger();
 
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
   reducers,
   applyMiddleware(
-    thunkMiddleware,
+    sagaMiddleware,
     loggerMiddleware,
   ),
 );
+
+sagaMiddleware.run(rootSaga);
 
 const App = () => (
   <Provider store={store}>

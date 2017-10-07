@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { fetchArticle, updateArticle } from '../../actions';
+import { fetchArticleAction, updateArticleAction } from '../../actions';
 
 import ExtendedCard from '../../components/ExtendedCard';
 import Loader from '../../components/Loader';
@@ -47,10 +47,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   fetchData(id) {
-    dispatch(fetchArticle(id));
+    dispatch(fetchArticleAction(id));
   },
   updateData(id, title) {
-    dispatch(updateArticle(id, title));
+    dispatch(updateArticleAction({ id, title }));
   },
 });
 
