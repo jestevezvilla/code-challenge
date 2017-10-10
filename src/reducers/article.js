@@ -1,10 +1,4 @@
-import {
-  REQUEST_ARTICLE,
-  RECEIVE_ARTICLE,
-  UPDATED_ARTICLE,
-  POST_UPDATED_ARTICLE,
-} from '../actions';
-
+import * as t from '../actions/constants';
 
 const article = (state = {
   isFetching: false,
@@ -12,24 +6,24 @@ const article = (state = {
   article: {},
 }, action) => {
   switch (action.type) {
-    case REQUEST_ARTICLE:
+    case t.REQUEST_ARTICLE:
       return {
         ...state,
         isFetching: true,
       };
-    case RECEIVE_ARTICLE:
+    case t.RECEIVE_ARTICLE:
       return {
         ...state,
         isFetching: false,
         article: action.article,
       };
-    case UPDATED_ARTICLE:
+    case t.UPDATED_ARTICLE:
       return {
         ...state,
         isUpdated: true,
         article: action.article,
       };
-    case POST_UPDATED_ARTICLE:
+    case t.POST_UPDATED_ARTICLE:
       return {
         ...state,
         isUpdated: false,

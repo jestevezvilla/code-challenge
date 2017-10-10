@@ -1,26 +1,22 @@
-import {
-  REQUEST_ARTICLES,
-  RECEIVE_ARTICLES,
-  REMOVED_ARTICLE,
-} from '../actions';
+import * as t from '../actions/constants';
 
 const articles = (state = {
   isFetching: false,
   articles: [],
 }, action) => {
   switch (action.type) {
-    case REQUEST_ARTICLES:
+    case t.REQUEST_ARTICLES:
       return {
         ...state,
         isFetching: true,
       };
-    case RECEIVE_ARTICLES:
+    case t.RECEIVE_ARTICLES:
       return {
         ...state,
         isFetching: false,
         articles: action.articles,
       };
-    case REMOVED_ARTICLE:
+    case t.REMOVED_ARTICLE:
       return {
         ...state,
         isFetching: false,
