@@ -15,8 +15,8 @@ export function* fetchArticleSaga(payload) {
 
 export function* updateArticleSaga(payload) {
   try {
-    const article = yield call(updateArticle, payload);
-    yield put({ type: t.UPDATED_ARTICLE, article: article.updateArticle });
+    const { updateArticle: article } = yield call(updateArticle, payload);
+    yield put({ type: t.UPDATED_ARTICLE, article });
     yield call(delay, 3000);
     yield put({ type: t.POST_UPDATED_ARTICLE });
   } catch (error) {

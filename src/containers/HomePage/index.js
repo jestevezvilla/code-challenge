@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { deleteArticle, fetchArticlesAction } from '../../actions';
+import { deleteArticleAction, fetchArticlesAction } from '../../actions';
 
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
@@ -52,7 +52,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onDeleteClick(id) {
-    dispatch(deleteArticle(id));
+    dispatch(deleteArticleAction(id));
   },
   fetchData() {
     dispatch(fetchArticlesAction());
