@@ -7,7 +7,7 @@ import Button from '../Button';
 import './styles.css';
 
 const Card = props => (
-  <div className="Card">
+  <div className={`Card ${props.removing ? 'animation-leave-active' : ''}`}>
     <div className="Card__wrapper">
       <h2 className="Card__wrapper__title">{props.title}</h2>
       <i>{props.author}</i>
@@ -23,6 +23,7 @@ Card.propTypes = {
   excerpt: PropTypes.string,
   id: PropTypes.string,
   onDelete: PropTypes.func,
+  removing: PropTypes.bool,
   title: PropTypes.string,
 };
 
