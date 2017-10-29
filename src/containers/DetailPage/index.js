@@ -7,7 +7,24 @@ import { fetchArticleAction, updateArticleAction } from '../../actions';
 import ExtendedCard from '../../components/ExtendedCard';
 import Loader from '../../components/Loader';
 
-class DetailPage extends Component {
+export class DetailPage extends Component {
+
+  static propTypes = {
+    fetchData: PropTypes.func,
+    isFetching: PropTypes.bool,
+    updateData: PropTypes.func,
+  };
+
+  static defaultProps = {
+    fetchData() {},
+    isFetching: false,
+    updateData() {},
+    match: {
+      params:{
+        id: null,
+      }
+    }
+  }
 
   componentDidMount() {
     const articleID = this.props.match.params.id;
@@ -30,11 +47,7 @@ class DetailPage extends Component {
   }
 }
 
-DetailPage.propTypes = {
-  fetchData: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  updateData: PropTypes.func.isRequired,
-};
+
 
 const mapStateToProps = state => {
   const { isFetching, isUpdated, article } = state.article;
