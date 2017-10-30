@@ -6,11 +6,9 @@ import { deleteArticleAction, fetchArticlesAction } from '../../actions';
 
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
-
 import './styles.css';
 
 class HomePage extends Component {
-
   componentDidMount() {
     const { fetchData } = this.props;
     fetchData();

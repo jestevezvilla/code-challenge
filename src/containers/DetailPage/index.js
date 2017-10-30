@@ -8,7 +8,6 @@ import ExtendedCard from '../../components/ExtendedCard';
 import Loader from '../../components/Loader';
 
 export class DetailPage extends Component {
-
   static propTypes = {
     fetchData: PropTypes.func,
     isFetching: PropTypes.bool,
