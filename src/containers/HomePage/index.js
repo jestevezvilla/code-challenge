@@ -22,10 +22,11 @@ class HomePage extends Component {
           <Loader title="Loading data..." /> :
           <div className="HomePage__container">
             {articles.map(item =>
-              <Card
+              (<Card
                 onDelete={() => onDeleteClick(item.id)}
-                key={item.id} {...item}
-              />)}
+                key={item.id}
+                {...item}
+              />))}
           </div>
         }
       </div>
@@ -58,6 +59,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default
-  connect(mapStateToProps,
-    mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

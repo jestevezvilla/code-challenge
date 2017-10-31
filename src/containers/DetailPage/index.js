@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -11,6 +12,7 @@ export class DetailPage extends Component {
   static propTypes = {
     fetchData: PropTypes.func,
     isFetching: PropTypes.bool,
+    match: PropTypes.shape,
     updateData: PropTypes.func,
   };
 
@@ -19,10 +21,10 @@ export class DetailPage extends Component {
     isFetching: false,
     updateData() {},
     match: {
-      params:{
+      params: {
         id: null,
-      }
-    }
+      },
+    },
   }
 
   componentDidMount() {
@@ -46,8 +48,6 @@ export class DetailPage extends Component {
   }
 }
 
-
-
 const mapStateToProps = state => {
   const { isFetching, isUpdated, article } = state.article;
   return {
@@ -66,6 +66,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default
-  connect(mapStateToProps,
-    mapDispatchToProps)(DetailPage);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailPage);

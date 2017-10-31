@@ -20,8 +20,8 @@ const articles = (state = {
       return {
         ...state,
         articles: state.articles.map(article =>
-          (article.id === action.id ? { ...article, removing: true } : article),
-        ),
+          (article.id === action.id ?
+            { ...article, removing: true } : article)),
       };
     case t.REMOVED_ARTICLE:
       return {

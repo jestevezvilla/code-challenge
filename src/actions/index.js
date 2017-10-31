@@ -1,4 +1,3 @@
-
 import * as t from '../actions/constants';
 
 export const fetchArticlesAction = () => ({

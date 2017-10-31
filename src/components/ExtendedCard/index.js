@@ -13,10 +13,11 @@ class ExtendedCard extends Component {
     };
   }
 
-  getTags = tags =>
-    (<div className="CardExtended__wrapper__tags">
+  getTags = tags => (
+    <div className="CardExtended__wrapper__tags">
       {tags.map(tag => <span className="CardExtended__wrapper__tags__tag" key={tag}>{tag}</span>)}
-    </div>);
+    </div>
+  );
 
   makeEditable = () =>
     this.setState({
@@ -39,39 +40,43 @@ class ExtendedCard extends Component {
   render() {
     const { isUpdated, article } = this.props;
     const { editable } = this.state;
-    return (<div className="CardExtended">
-      <LinkButton buttonClass="Button-top" action="/" text="&lt; Back to list" />
-      {isUpdated &&
-        <Message text="Article updated!" />}
-      <div className="CardExtended__wrapper">
-        <h2 className="CardExtended__wrapper__title">
-          {!editable ?
-            <span
-              className="CardExtended__wrapper__input"
-              onClick={this.makeEditable}
-            >{article.title}</span>
-            :
-            <input
-              type="text"
-              autoFocus
-              className="CardExtended__wrapper__input"
-              defaultValue={article.title}
-              onBlur={this.changeTitle}
-              onKeyPress={this.handleKeyPress}
-            />}
-        </h2>
-        {article.tags && this.getTags(article.tags)}
-        {article.published &&
-          <span className="CardExtended__wrapper__badge">Published</span>}
-        <i>{article.author}</i>
-        <p className="CardExtended__wrapper__p">{article.content}</p>
-      </div>
-    </div>);
+    return (
+      <div className="CardExtended">
+        <LinkButton buttonClass="Button-top" action="/" text="&lt; Back to list" />
+        {isUpdated &&
+          <Message text="Article updated!" />}
+        <div className="CardExtended__wrapper">
+          <h2 className="CardExtended__wrapper__title">
+            {!editable ?
+              <span
+                className="CardExtended__wrapper__input"
+                onClick={this.makeEditable}
+                onKeyUp={this.makeEditable}
+              >
+                {article.title}
+              </span>
+              :
+              <input
+                type="text"
+                // autoFocus
+                className="CardExtended__wrapper__input"
+                defaultValue={article.title}
+                onBlur={this.changeTitle}
+                onKeyPress={this.handleKeyPress}
+              />}
+          </h2>
+          {article.tags && this.getTags(article.tags)}
+          {article.published &&
+            <span className="CardExtended__wrapper__badge">Published</span>}
+          <i>{article.author}</i>
+          <p className="CardExtended__wrapper__p">{article.content}</p>
+        </div>
+      </div>);
   }
-
 }
 
 ExtendedCard.propTypes = {
+  article: PropTypes.shape,
   isUpdated: PropTypes.bool,
   onChangeData: PropTypes.func,
 };

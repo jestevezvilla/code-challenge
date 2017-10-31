@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = props =>
-  (<a className="Button" onClick={props.onButtonClick}>{props.text}</a>);
+  (<a href="#default" className="Button" onClick={props.onButtonClick}>{props.text}</a>);
 
 Button.propTypes = {
   onButtonClick: PropTypes.func,

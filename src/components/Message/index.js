@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.css';
 
-const Message = props =>
-  (<div className="Message">
+const Message = props => (
+  <div className="Message">
     <span>{props.text}</span>
   </div>);
 
