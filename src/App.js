@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
+import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 //
 import rootSaga from './sagas';
@@ -19,7 +20,7 @@ import HomePage from './containers/HomePage';
 import DetailPage from './containers/DetailPage';
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'http://localhost:4000/graphql' }),
+  link: createHttpLink({ uri: 'http://localhost:4000/graphql' }),
   cache: new InMemoryCache(),
   connectToDevTools: true,
 });
@@ -47,17 +48,19 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 const App = () => (
-  <ApolloProvider client={client} store={store}>
-    <div className="App">
-      <Header title="Authors" />
-      <Router>
-        <Switch>
-          <Route path="/:id" component={DetailPage} />
-          <Route path="/" component={HomePage} />
-        </Switch>
-      </Router>
-      <Footer title="@Copyright 2017" />
-    </div>
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <div className="App">
+        <Header title="Authors" />
+        <Router>
+          <Switch>
+            <Route path="/:id" component={DetailPage} />
+            <Route path="/" component={HomePage} />
+          </Switch>
+        </Router>
+        <Footer title="@Copyright 2017" />
+      </div>
+    </Provider>
   </ApolloProvider>
 );
 

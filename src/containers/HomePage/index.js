@@ -29,7 +29,7 @@ const HomePage = ({ data: { loading, error, articles } }) =>
   );
 
 HomePage.propTypes = {
-  data: PropTypes.shape,
+  data: PropTypes.oneOfType([PropTypes.object]),
 };
 
 const articlesListQuery = gql`${ARTICLES_QUERY}`;
