@@ -1,5 +1,9 @@
 'use strict';
 
+
+//TODO: Terminar de configurar CSSNEXT http://cssnext.io/postcss/
+
+
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');

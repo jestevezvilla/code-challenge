@@ -6,7 +6,7 @@ import { deleteArticleAction, fetchArticlesAction } from '../../actions';
 
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
-import './styles.css';
+import './HomePage.css';
 
 class HomePage extends Component {
   componentDidMount() {

@@ -1,0 +1,12 @@
+:root {
+  --danger-theme: {
+    color: white;
+    background-color: red;
+  };
+}
+
+.HomePage{
+  @apply --danger-theme;
+  width: 80%;
+  margin: 0 auto;
+}
