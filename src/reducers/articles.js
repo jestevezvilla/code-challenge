@@ -26,7 +26,6 @@ const articles = (state = {
     case t.REMOVED_ARTICLE:
       return {
         ...state,
-        isFetching: false,
         articles: state.articles.filter(article => !article.removing),
       };
     default:
