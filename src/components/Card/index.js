@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import LinkButton from '../LinkButton';
 import Button from '../Button';
 
-import './styles.css';
+import './Card.css';
 
 const Card = props => (
   <div className={`Card ${props.removing ? 'animation-leave-active' : ''}`}>
