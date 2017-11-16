@@ -1,8 +1,0 @@
-.Card{
-  width: 33%;
-}
-
-.Card.animation-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
