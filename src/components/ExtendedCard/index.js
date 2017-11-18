@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import LinkButton from '../../components/LinkButton';
 import Message from '../../components/Message';
 
-import './styles.css';
-
 class ExtendedCard extends Component {
   constructor() {
     super();

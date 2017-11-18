@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './styles.css';
+import StyledFooter from './styles';
 
 const Footer = props => (
-  <footer className="Footer">{props.title}</footer>
+  <StyledFooter className="Footer">{props.title}</StyledFooter>
 );
 
 Footer.propTypes = {
