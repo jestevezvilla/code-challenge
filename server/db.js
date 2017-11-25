@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 // mongoose Promises will be deprecated
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://192.168.99.100/billin');
+mongoose.connect('mongodb://127.0.0.1/billin');
 mongoose.set('debug', true);
 
 const Article = mongoose.model('Article', {
