@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailPage should snapshot be OK 1`] = `
+<div
+  className="DetailPage"
+>
+  <Loader
+    title="Loading data..."
+  />
+</div>
+`;

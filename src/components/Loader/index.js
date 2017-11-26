@@ -5,7 +5,7 @@ import './styles.css';
 
 const Loader = props => (
   <div className="Loader">
-    <p>{props.title}</p>
+    <span>{props.title}</span>
   </div>
 );
 

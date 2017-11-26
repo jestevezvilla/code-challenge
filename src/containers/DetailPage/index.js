@@ -12,7 +12,11 @@ export class DetailPage extends Component {
   static propTypes = {
     fetchData: PropTypes.func,
     isFetching: PropTypes.bool,
-    match: PropTypes.shape,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string,
+      }),
+    }),
     updateData: PropTypes.func,
   };
 
@@ -36,7 +40,7 @@ export class DetailPage extends Component {
   render() {
     const { isFetching, updateData, ...props } = this.props;
     return (
-      <div className="HomePage">
+      <div className="DetailPage">
         {isFetching ?
           <Loader title="Loading data..." /> :
           <div className="HomePage__container">

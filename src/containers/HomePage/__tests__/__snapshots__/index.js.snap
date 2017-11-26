@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage should snapshot be OK 1`] = `
+<div
+  className="HomePage"
+>
+  <Loader
+    title="Loading data..."
+  />
+</div>
+`;

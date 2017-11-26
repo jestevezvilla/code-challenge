@@ -1,28 +1,25 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { DetailPage } from '../index';
 
-describe('DetailPage', () => {
+import { HomePage } from '../index';
+
+describe('HomePage', () => {
   let props;
   let mountedComponent;
   const component = () => {
     if (!mountedComponent) {
       mountedComponent =
-        shallow(<DetailPage {...props} />);
+        shallow(<HomePage {...props} />);
     }
     return mountedComponent;
   };
 
   beforeEach(() => {
     props = {
+      articles: [],
       fetchData() {},
       isFetching: true,
-      match: {
-        params: {
-          id: '1234',
-        },
-      },
-      updateData() {},
+      onDeleteClick() {},
     };
     mountedComponent = undefined;
   });
@@ -31,7 +28,7 @@ describe('DetailPage', () => {
     expect(component()).toMatchSnapshot();
   });
 
-  it('should Loading when isFetching', () => {
+  it('should Loading when isFetchin', () => {
     expect(component().find('Loader').exists()).toBe(true);
   });
   
