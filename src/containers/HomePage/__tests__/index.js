@@ -16,9 +16,11 @@ describe('HomePage', () => {
 
   beforeEach(() => {
     props = {
-      articles: [],
-      fetchData() {},
-      isFetching: true,
+      data: {
+        loading: true,
+        error: false,
+        articles: [],
+      },
       onDeleteClick() {},
     };
     mountedComponent = undefined;

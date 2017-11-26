@@ -10,7 +10,7 @@ import { ARTICLES_QUERY } from '../../actions/queries';
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
 
-const HomePage = ({ data: { loading, error, articles }, onDeleteClick }) =>
+export const HomePage = ({ data: { loading, error, articles }, onDeleteClick }) =>
   (
     <div className="HomePage">
       {error &&
