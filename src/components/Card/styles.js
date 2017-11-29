@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledCard = styled.div`
+export const Card = styled.div`
   box-sizing: border-box;
   color: palevioletred;
   display: inline-block;
@@ -14,5 +14,3 @@ const StyledCard = styled.div`
     color: #000;
   }
 `;
-
-export default StyledCard;

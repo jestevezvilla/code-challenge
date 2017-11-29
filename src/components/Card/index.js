@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import LinkButton from '../LinkButton';
 import Button from '../Button';
 
-import StyledCard from './styles';
+import * as Styled from './styles';
 
 const Card = props => (
-  <StyledCard removing={props.removing}>
+  <Styled.Card removing={props.removing}>
     <div>
       <h2>{props.title}</h2>
       <i>{props.author}</i>
@@ -15,7 +15,7 @@ const Card = props => (
       <Button onButtonClick={props.onDelete} text="Delete" />
       <LinkButton action={props.id} text="View" />
     </div>
-  </StyledCard>
+  </Styled.Card>
 );
 
 Card.propTypes = {
