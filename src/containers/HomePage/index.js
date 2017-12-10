@@ -2,26 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { connect } from 'react-redux';
-import { branch, renderComponent } from 'recompose';
 
-import { deleteArticleAction } from '../../actions';
+import { branch, renderComponent, withProps } from 'recompose';
+
 
 import { ARTICLES_QUERY } from '../../actions/queries';
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
 
 
+const enhanceLoader = withProps({ title: 'Loading' });
+const LoaderWithTitle = enhanceLoader(Loader);
+
 const whileLoading = loading =>
   branch(
     loading,
-    renderComponent(Loader),
+    renderComponent(LoaderWithTitle),
   );
 
-const enhance =
-  whileLoading(props => props.data.error);
 
-const HomePage = enhance(({ data: { error, articles }, onDeleteClick }) =>
+const enhanceHomePage = whileLoading(props => props.data.loading);
+
+const HomePage = ({ data: { error, articles } }) =>
   (
     <div className="HomePage">
       {error &&
@@ -30,27 +32,19 @@ const HomePage = enhance(({ data: { error, articles }, onDeleteClick }) =>
       <div className="HomePage__container">
         {articles.map(item =>
           (<Card
-            onDelete={() => onDeleteClick(item.id)}
             key={item.id}
             {...item}
           />))}
       </div>
     </div>
-  ));
+  );
+
+const HomePageWithLoader = enhanceHomePage(HomePage);
 
 HomePage.propTypes = {
   data: PropTypes.oneOfType([PropTypes.object]),
-  onDeleteClick: PropTypes.func,
 };
 
-const mapDispatchToProps = dispatch => ({
-  onDeleteClick(id) {
-    dispatch(deleteArticleAction(id));
-  },
-});
-
-const HomePageConnected = connect(null, mapDispatchToProps)(HomePage);
-
 const articlesListQuery = gql`${ARTICLES_QUERY}`;
-const ArticlesListWithData = graphql(articlesListQuery)(HomePageConnected);
+const ArticlesListWithData = graphql(articlesListQuery)(HomePageWithLoader);
 export default ArticlesListWithData;
